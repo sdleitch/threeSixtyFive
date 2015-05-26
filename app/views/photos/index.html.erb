@@ -1,7 +1,9 @@
-<% @photos.each do |photo| %>
-<div class='photo'>
-  <h2 class='photo-title'>
-    <%= photo.title %>
-  </h2>
+<div class='wrapper'>
+	<% @photos.each do |photo| %>
+		<div class='photo'>
+		  <h2 class='photo-title'>
+		    <%= photo.title %>
+		  </h2>
+		</div>
+	<% end %>
 </div>
-<% end %>
