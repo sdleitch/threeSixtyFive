@@ -18,6 +18,7 @@ class PhotosController < ApplicationController
 	end
 
 	def show
+		@photos = Photo.all
 		@photo = Photo.find_by(params[:id])
 	end
 
