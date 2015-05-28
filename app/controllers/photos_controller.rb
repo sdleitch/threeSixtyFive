@@ -6,22 +6,16 @@ class PhotosController < ApplicationController
 		#Get all of my photos from 500px and turn them to a big hash
 		@response = F00px.get('photos?feature=user&username=sdleitch&sort=created_at&image_size=3&include_store=store_download&include_states=voted')
 		@response = JSON.parse(@response.body)
-		@response_photos = []
+		@to_create = []
 		@response['photos'].each do |photo|
-			@response_photos << photo['id']
-		end
-
-		#Check if any of the pictures don't already exist.
-		@photos.each do |photo|
-			if !photo.px_id.in?(@response_photos)
-				raise 'hell'
+			if !photo['id'].in?(Photo.all.pluck(:px_id))
+				@to_create << Photo.new(px_id: photo['id'], title: photo['name'], image_url: photo['image_url'])
 			end
+			# raise 'hell'
 		end
-
-	end
-
-	def new
-		@photo = Photo.new
+		@to_create.each do |photo|
+			photo.save
+		end
 	end
 
 	def create
