@@ -8,12 +8,12 @@ class PhotosController < ApplicationController
 		@response = JSON.parse(@response.body)
 		@to_create = []
 		@response['photos'].each do |photo|
+			#If this photo doesn't already exist, and wasn't taken on the same date as any that already exists or are set to exist...
 			if !photo['id'].in?(@photos.pluck(:px_id)) && !photo['taken_at'].to_date.in?(@to_create.map(&:taken_on) || Photo.all.pluck(:taken_on))
+				# ...then add it to the photos set to exist.
 				@to_create << Photo.new(px_id: photo['id'], title: photo['name'], image_url: photo['image_url'][0], lrg_image_url: photo['image_url'][1], taken_on: photo['taken_at'])
 			end
-			# raise 'hell'
 		end
-		# raise 'hell'
 		@to_create.each do |photo|
 			photo.save
 		end
@@ -22,8 +22,4 @@ class PhotosController < ApplicationController
 	def show
 		@photo = Photo.find(params[:id])
 	end
-
-	# def photo_params
-	# 	params.require(:photo).permit(:title, :taken_on, :number, :image_url, :lrg_image_url)
-	# end
 end
