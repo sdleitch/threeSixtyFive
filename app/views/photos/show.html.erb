@@ -1,0 +1,7 @@
+<div class='photo-info'>
+	<h1><%= @photo.title %></h1>
+	<h3><%= @photo.taken_on.to_formatted_s(:long) %></h3>
+</div>
+<div class='lrg-photo'>
+	<%= image_tag(@photo.lrg_image_url) %>
+</div>

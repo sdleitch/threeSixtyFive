@@ -11,16 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528003606) do
+ActiveRecord::Schema.define(version: 20150531134442) do
 
   create_table "photos", force: :cascade do |t|
     t.string   "title"
     t.date     "taken_on"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "number"
     t.string   "image_url"
     t.integer  "px_id"
+    t.string   "lrg_image_url"
   end
 
 end
