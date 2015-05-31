@@ -8,11 +8,10 @@ class PhotosController < ApplicationController
 		@response = JSON.parse(@response.body)
 		@to_create = []
 		@response['photos'].each do |photo|
-			# raise 'hell'
-			if !photo['id'].in?(Photo.all.pluck(:px_id)) && !photo['taken_at'].to_date.in?(Photo.all.pluck(:taken_on))
+			if !photo['id'].in?(@photos.pluck(:px_id)) && !photo['taken_at'].to_date.in?(@to_create.map(&:taken_on) || Photo.all.pluck(:taken_on))
 				@to_create << Photo.new(px_id: photo['id'], title: photo['name'], image_url: photo['image_url'][0], lrg_image_url: photo['image_url'][1], taken_on: photo['taken_at'])
 			end
-			raise 'hell'
+			# raise 'hell'
 		end
 		# raise 'hell'
 		@to_create.each do |photo|
