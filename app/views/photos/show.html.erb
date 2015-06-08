@@ -4,4 +4,11 @@
 </div>
 <div class='lrg-photo'>
 	<%= image_tag(@photo.lrg_image_url) %>
+	<div class="nav-buttons">
+		<div class="previous">
+			<%= link_to('Previous', '/' + (@photo.id-1).to_s) if @photo.prev_pic %>
+		</div>
+		<div class="next">
+			<%= link_to('Next', '/' + (@photo.id+1).to_s) if @photo.next_pic %>
+		</div>		
 </div>

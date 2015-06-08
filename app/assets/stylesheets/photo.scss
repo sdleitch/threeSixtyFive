@@ -49,3 +49,21 @@
 	bottom: 30px;
 	right: 30px;
 }
+
+.nav-buttons {
+	width: 100%;
+	display: block;
+	position: absolute;
+	bottom: 50%;
+	padding: 30px;
+
+	.next {
+		display: inline-block;
+		float: right;
+	}
+
+	.previous {
+		display: inline-block;
+		float: left;
+	}
+}
